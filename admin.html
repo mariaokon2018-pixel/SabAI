@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard — SabAI</title>
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="admin-super.css">
+    <link rel="stylesheet" href="/admin-super.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -280,14 +280,14 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
-    <script src="admin-super.js"></script>
+    <script src="/app.js"></script>
+    <script src="/admin-super.js"></script>
     <script>
         // ============================================
         // ROLE CHECK — First thing on page load
         // ============================================
         var userRole = localStorage.getItem('userRole');
-        if (!userRole) { window.location.href = 'login.html'; }
+        if (!userRole) { window.location.href = '/login.html'; }
 
         lucide.createIcons();
 
@@ -339,7 +339,7 @@
             localStorage.removeItem('sabai_auth');
             localStorage.removeItem('userRole');
             localStorage.removeItem('sabai_user');
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
         };
 
         // ============================================
