@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - SabAI</title>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
-        // Immediate role check
-        const role = localStorage.getItem('userRole');
-        if (!role) {
+        if(localStorage.getItem('sabai_auth') !== 'true') {
             window.location.href = 'login.html';
         }
     </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="dashboard-container">
 
@@ -25,23 +23,21 @@
             </a>
         </div>
         <nav class="sidebar-nav">
-            <a href="#" class="nav-item active">
+            <a href="#" class="nav-item active" data-target="view-overview">
                 <i class="fa-solid fa-chart-pie"></i> Overview
             </a>
-            <div id="business-nav-items">
-                <a href="#" class="nav-item">
-                    <i class="fa-solid fa-comments"></i> Chat History
-                </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-solid fa-robot"></i> Automation
-                </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-solid fa-gear"></i> Settings
-                </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-solid fa-book-open"></i> Knowledge Base
-                </a>
-            </div>
+            <a href="#" class="nav-item" data-target="view-chat">
+                <i class="fa-solid fa-comments"></i> Chat History
+            </a>
+            <a href="#" class="nav-item" data-target="view-automation">
+                <i class="fa-solid fa-robot"></i> Automation
+            </a>
+            <a href="#" class="nav-item" data-target="view-settings">
+                <i class="fa-solid fa-gear"></i> Settings
+            </a>
+            <a href="#" class="nav-item" data-target="view-knowledge">
+                <i class="fa-solid fa-book-open"></i> Knowledge Base
+            </a>
         </nav>
         <div class="sidebar-footer">
             <a href="#" id="logout-btn" class="nav-item" style="color: #ef4444;">
@@ -53,153 +49,224 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="topbar">
-            <h1 class="page-title" id="topbar-title">Dashboard</h1>
+            <h1 class="page-title" id="topbar-title">Overview</h1>
             <div class="current-date" id="current-date"></div>
         </div>
 
-        <!-- Super Admin View -->
-        <div id="superAdminView" style="display: none;">
-            <h2 class="hero-heading" style="font-size: 28px; margin-bottom: 24px;">Super Admin Dashboard</h2>
+        <!-- View: Overview -->
+        <div id="view-overview" class="dashboard-view active">
+            <div class="welcome-card">
+                <h2>Welcome to SabAI! <i class="fa-solid fa-hand-sparkles"></i></h2>
+                <p>Your AI assistant is ready to be configured. Follow the checklist below to get started.</p>
+            </div>
+
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-title">Total Businesses</div>
-                    <div class="stat-value">12</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-title">Total Conversations</div>
-                    <div class="stat-value">1425</div>
+                    <div class="stat-title">Total Conversations Today</div>
+                    <div class="stat-value">0</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-title">Total Replies Sent</div>
-                    <div class="stat-value">5204</div>
+                    <div class="stat-value">0</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-title">Revenue This Month</div>
-                    <div class="stat-value">$2400</div>
+                    <div class="stat-title">Instagram Comments</div>
+                    <div class="stat-value">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Facebook DMs</div>
+                    <div class="stat-value">0</div>
                 </div>
             </div>
 
-            <div class="table-container" style="margin-top: 32px;">
-                <h3 style="margin-bottom: 16px;">Registered Businesses</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Conversations Today</th>
-                            <th>Joined Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Glow Beauty</strong></td>
-                            <td><span class="status-badge status-resolved">Active</span></td>
-                            <td>42</td>
-                            <td>Jan 15, 2024</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Fresh Cuts</strong></td>
-                            <td><span class="status-badge status-resolved">Active</span></td>
-                            <td>12</td>
-                            <td>Feb 10, 2024</td>
-                        </tr>
-                        <tr>
-                            <td><strong>FitLife Gym</strong></td>
-                            <td><span class="status-badge status-resolved">Active</span></td>
-                            <td>85</td>
-                            <td>Mar 05, 2024</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Sparkle Clean</strong></td>
-                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">Inactive</span></td>
-                            <td>0</td>
-                            <td>Jan 20, 2024</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pet Palace</strong></td>
-                            <td><span class="status-badge status-resolved">Active</span></td>
-                            <td>28</td>
-                            <td>Apr 12, 2024</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="activity-feed">
+                <h3 class="feed-header">Getting Started Checklist</h3>
+                <div class="checklist-item">
+                    <i class="fa-regular fa-circle-check" style="color: var(--accent-purple);"></i>
+                    <span>Connect your Instagram account</span>
+                </div>
+                <div class="checklist-item">
+                    <i class="fa-regular fa-circle"></i>
+                    <span>Connect your Facebook page</span>
+                </div>
+                <div class="checklist-item">
+                    <i class="fa-regular fa-circle"></i>
+                    <span>Add your business information to the Knowledge Base</span>
+                </div>
+                <div class="checklist-item" style="border-bottom: none;">
+                    <i class="fa-regular fa-circle"></i>
+                    <span>Enable Auto Reply toggles</span>
+                </div>
             </div>
         </div>
 
-        <!-- Business View -->
-        <div id="businessView" style="display: none;">
-            <h2 class="hero-heading" style="font-size: 28px; margin-bottom: 24px;">Business Dashboard</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-title">Total Conversations</div>
-                    <div class="stat-value">12</div>
+        <!-- View: Chat History -->
+        <div id="view-chat" class="dashboard-view">
+            <div class="empty-state-container card">
+                <div class="empty-state-icon">
+                    <i class="fa-solid fa-comments"></i>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-title">Replies Sent</div>
-                    <div class="stat-value">47</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-title">Instagram Replied</div>
-                    <div class="stat-value">23</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-title">Facebook Replied</div>
-                    <div class="stat-value">24</div>
+                <h3>No conversations yet</h3>
+                <p>Your AI assistant is waiting for its first customer interaction.</p>
+            </div>
+        </div>
+
+        <!-- View: Automation -->
+        <div id="view-automation" class="dashboard-view">
+            <div class="tip-card">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <i class="fa-solid fa-circle-info" style="color: var(--accent-purple);"></i>
+                    <p><strong>Tip:</strong> Connect your social media accounts in Settings to enable these automations.</p>
                 </div>
             </div>
-            
-            <div class="activity-feed" style="margin-top: 32px;">
-                <h3 class="feed-header">Recent Activity</h3>
-                <div class="activity-row">
-                    <div class="activity-icon icon-pink"><i class="fa-brands fa-instagram"></i></div>
-                    <div class="activity-details">
-                        <div class="activity-msg">Instagram comment replied</div>
-                        <div class="activity-time">2 minutes ago</div>
+            <div class="automation-grid">
+                <div class="toggle-card">
+                    <div class="toggle-info">
+                        <div class="toggle-icon icon-pink" style="background: transparent;"><i class="fa-brands fa-instagram"></i></div>
+                        <div class="toggle-details">
+                            <h3>Instagram Auto Reply</h3>
+                            <p>Automatically reply to Instagram comments and DMs.</p>
+                        </div>
+                    </div>
+                    <div class="toggle-switch" onclick="this.classList.toggle('on')">
+                        <div class="toggle-label">OFF</div>
+                        <div class="toggle-knob"></div>
                     </div>
                 </div>
-                <div class="activity-row">
-                    <div class="activity-icon icon-blue"><i class="fa-brands fa-facebook"></i></div>
-                    <div class="activity-details">
-                        <div class="activity-msg">Facebook DM answered</div>
-                        <div class="activity-time">5 minutes ago</div>
+                <div class="toggle-card">
+                    <div class="toggle-info">
+                        <div class="toggle-icon icon-blue" style="background: transparent;"><i class="fa-brands fa-facebook"></i></div>
+                        <div class="toggle-details">
+                            <h3>Facebook Auto Reply</h3>
+                            <p>Automatically reply to Facebook messages and comments.</p>
+                        </div>
+                    </div>
+                    <div class="toggle-switch" onclick="this.classList.toggle('on')">
+                        <div class="toggle-label">OFF</div>
+                        <div class="toggle-knob"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- View: Settings -->
+        <div id="view-settings" class="dashboard-view">
+            <div class="settings-form">
+                <form id="settings-form-el">
+                    <div class="form-group">
+                        <label class="form-label">Business Name</label>
+                        <input type="text" class="form-control" value="My Business" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contact Number</label>
+                        <input type="tel" class="form-control" placeholder="e.g. +1 234 567 890" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Website URL</label>
+                        <input type="url" class="form-control" placeholder="https://example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Reply Tone</label>
+                        <select class="form-control">
+                            <option value="Professional">Professional</option>
+                            <option value="Friendly">Friendly</option>
+                            <option value="Apologetic">Apologetic</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                    
+                    <div id="settings-success" style="color: var(--accent-green); font-size: 14px; margin-top: 16px; display: none;">
+                        <i class="fa-solid fa-check-circle"></i> Settings saved successfully.
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- View: Knowledge Base -->
+        <div id="view-knowledge" class="dashboard-view">
+            <div class="warning-card">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p><strong>Please add your business information</strong> to train your AI assistant before enabling automations.</p>
+                </div>
+            </div>
+            <div class="settings-form" style="max-width: 800px;">
+                <form id="kb-form-el">
+                    <div class="form-group">
+                        <label class="form-label" style="font-size: 18px; margin-bottom: 12px;">Business Knowledge Base</label>
+                        <textarea class="form-control" style="min-height: 300px;" placeholder="Paste all your business information here. Include your business name, services, opening hours, location, FAQs and anything else your AI assistant should know." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Save Knowledge Base</button>
+                    
+                    <div id="kb-success" style="color: var(--accent-green); font-size: 14px; margin-top: 16px; display: none;">
+                        <i class="fa-solid fa-check-circle"></i> Knowledge base updated successfully.
+                    </div>
+                </form>
             </div>
         </div>
 
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const userRole = localStorage.getItem('userRole');
-            const superAdminView = document.getElementById('superAdminView');
-            const businessView = document.getElementById('businessView');
-            const businessNavItems = document.getElementById('business-nav-items');
-            const topbarTitle = document.getElementById('topbar-title');
-            
-            // Set current date
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', dateOptions);
+        // Set current date
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', dateOptions);
 
-            if (userRole === 'superadmin') {
-                superAdminView.style.display = 'block';
-                businessView.style.display = 'none';
-                businessNavItems.style.display = 'none';
-                topbarTitle.textContent = 'Super Admin Panel';
-            } else {
-                superAdminView.style.display = 'none';
-                businessView.style.display = 'block';
-                businessNavItems.style.display = 'block';
-                topbarTitle.textContent = 'Business Overview';
-            }
-            
-            // Logout Logic
-            document.getElementById('logout-btn').addEventListener('click', (e) => {
+        // Sidebar Navigation Logic
+        const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+        const views = document.querySelectorAll('.dashboard-view');
+        const topbarTitle = document.getElementById('topbar-title');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
                 e.preventDefault();
-                localStorage.removeItem('userRole');
-                window.location.href = 'login.html';
+                
+                // Update active state on nav
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                
+                // Update title
+                topbarTitle.textContent = item.textContent.trim();
+                
+                // Switch view
+                const targetId = item.getAttribute('data-target');
+                views.forEach(view => {
+                    if(view.id === targetId) {
+                        view.classList.add('active');
+                    } else {
+                        view.classList.remove('active');
+                    }
+                });
             });
         });
+
+        // Logout Logic
+        document.getElementById('logout-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('sabai_auth');
+            window.location.href = 'login.html';
+        });
+
+        // Forms Logic
+        const settingsForm = document.getElementById('settings-form-el');
+        const settingsSuccess = document.getElementById('settings-success');
+        settingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            settingsSuccess.style.display = 'block';
+            setTimeout(() => settingsSuccess.style.display = 'none', 3000);
+        });
+
+        const kbForm = document.getElementById('kb-form-el');
+        const kbSuccess = document.getElementById('kb-success');
+        kbForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            kbSuccess.style.display = 'block';
+            setTimeout(() => kbSuccess.style.display = 'none', 3000);
+        });
+
+        // Toggle switches click logic is handled directly inline with onclick="this.classList.toggle('on')"
     </script>
 </body>
 </html>

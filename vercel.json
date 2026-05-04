@@ -1,7 +1,9 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/server.js" },
-    { "source": "/widget.js", "destination": "/server.js" }
+    { "source": "/setup", "destination": "/setup.html" },
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/demo", "destination": "/demo.html" }
   ]
 }
