@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SabAI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        // Immediate role check
+        const role = localStorage.getItem('userRole');
+        if (!role) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo" style="text-decoration: none; color: white;">
+                <i class="fa-solid fa-bolt logo-icon"></i> SabAI
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <i class="fa-solid fa-chart-pie"></i> Overview
+            </a>
+            <div id="business-nav-items">
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-comments"></i> Chat History
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-robot"></i> Automation
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-book-open"></i> Knowledge Base
+                </a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" id="logout-btn" class="nav-item" style="color: #ef4444;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="topbar">
+            <h1 class="page-title" id="topbar-title">Dashboard</h1>
+            <div class="current-date" id="current-date"></div>
+        </div>
+
+        <!-- Super Admin View -->
+        <div id="superAdminView" style="display: none;">
+            <h2 class="hero-heading" style="font-size: 28px; margin-bottom: 24px;">Super Admin Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Total Businesses</div>
+                    <div class="stat-value">12</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Total Conversations</div>
+                    <div class="stat-value">1425</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Total Replies Sent</div>
+                    <div class="stat-value">5204</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Revenue This Month</div>
+                    <div class="stat-value">$2400</div>
+                </div>
+            </div>
+
+            <div class="table-container" style="margin-top: 32px;">
+                <h3 style="margin-bottom: 16px;">Registered Businesses</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Conversations Today</th>
+                            <th>Joined Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Glow Beauty</strong></td>
+                            <td><span class="status-badge status-resolved">Active</span></td>
+                            <td>42</td>
+                            <td>Jan 15, 2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fresh Cuts</strong></td>
+                            <td><span class="status-badge status-resolved">Active</span></td>
+                            <td>12</td>
+                            <td>Feb 10, 2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FitLife Gym</strong></td>
+                            <td><span class="status-badge status-resolved">Active</span></td>
+                            <td>85</td>
+                            <td>Mar 05, 2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sparkle Clean</strong></td>
+                            <td><span class="status-badge" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">Inactive</span></td>
+                            <td>0</td>
+                            <td>Jan 20, 2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pet Palace</strong></td>
+                            <td><span class="status-badge status-resolved">Active</span></td>
+                            <td>28</td>
+                            <td>Apr 12, 2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Business View -->
+        <div id="businessView" style="display: none;">
+            <h2 class="hero-heading" style="font-size: 28px; margin-bottom: 24px;">Business Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Total Conversations</div>
+                    <div class="stat-value">12</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Replies Sent</div>
+                    <div class="stat-value">47</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Instagram Replied</div>
+                    <div class="stat-value">23</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Facebook Replied</div>
+                    <div class="stat-value">24</div>
+                </div>
+            </div>
+            
+            <div class="activity-feed" style="margin-top: 32px;">
+                <h3 class="feed-header">Recent Activity</h3>
+                <div class="activity-row">
+                    <div class="activity-icon icon-pink"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="activity-details">
+                        <div class="activity-msg">Instagram comment replied</div>
+                        <div class="activity-time">2 minutes ago</div>
+                    </div>
+                </div>
+                <div class="activity-row">
+                    <div class="activity-icon icon-blue"><i class="fa-brands fa-facebook"></i></div>
+                    <div class="activity-details">
+                        <div class="activity-msg">Facebook DM answered</div>
+                        <div class="activity-time">5 minutes ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userRole = localStorage.getItem('userRole');
+            const superAdminView = document.getElementById('superAdminView');
+            const businessView = document.getElementById('businessView');
+            const businessNavItems = document.getElementById('business-nav-items');
+            const topbarTitle = document.getElementById('topbar-title');
+            
+            // Set current date
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', dateOptions);
+
+            if (userRole === 'superadmin') {
+                superAdminView.style.display = 'block';
+                businessView.style.display = 'none';
+                businessNavItems.style.display = 'none';
+                topbarTitle.textContent = 'Super Admin Panel';
+            } else {
+                superAdminView.style.display = 'none';
+                businessView.style.display = 'block';
+                businessNavItems.style.display = 'block';
+                topbarTitle.textContent = 'Business Overview';
+            }
+            
+            // Logout Logic
+            document.getElementById('logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('userRole');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>

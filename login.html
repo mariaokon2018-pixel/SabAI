@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SabAI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Password field fix */
+        #password {
+            color: #FFFFFF !important;
+            background-color: #1A1A2E !important;
+            border: 1px solid rgba(255,255,255,0.1);
+            caret-color: #FFFFFF;
+        }
+        #password::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-toggle-icon {
+            position: absolute;
+            right: 16px;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s;
+            z-index: 2;
+        }
+        .password-toggle-icon:hover {
+            color: #FFFFFF;
+        }
+        /* Also fix email field for consistency */
+        #email {
+            color: #FFFFFF !important;
+            background-color: #1A1A2E !important;
+            border: 1px solid rgba(255,255,255,0.1);
+            caret-color: #FFFFFF;
+        }
+        #email::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+    </style>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #0F0F1A;">
+    
+    <div style="width: 100%; max-width: 400px; padding: 24px; text-align: center;">
+        <a href="index.html" class="logo" style="text-decoration: none; color: white; justify-content: center; margin-bottom: 32px;">
+            <i class="fa-solid fa-bolt logo-icon"></i> SabAI
+        </a>
+        
+        <h1 class="hero-heading" style="font-size: 32px; margin-bottom: 8px;">Welcome Back</h1>
+        <p class="hero-subtitle" style="margin-bottom: 32px; font-size: 15px;">Login to your SabAI dashboard.</p>
+        
+        <div class="card" style="text-align: left; padding: 32px; box-shadow: 0 0 30px rgba(168, 85, 247, 0.1);">
+            <form id="login-form">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <input type="email" id="email" class="form-control" placeholder="Admin Email" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 24px;">
+                    <div class="password-wrapper">
+                        <input type="password" id="password" class="form-control" placeholder="Password" required style="padding-right: 45px;">
+                        <i class="fa-solid fa-eye password-toggle-icon" id="toggle-password"></i>
+                    </div>
+                </div>
+                
+                <div id="login-error" style="color: #ef4444; font-size: 13px; margin-bottom: 16px; display: none; text-align: center;">
+                    Incorrect email or password
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Login</button>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" id="forgot-password" style="color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // LOGIN LOGIC - COMPLETE REWRITE
+        // ============================================
+
+        const form = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('toggle-password');
+
+        // Password toggle (eye icon)
+        togglePassword.addEventListener('click', function () {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+
+        // Form submit
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            var email = emailInput.value.trim().toLowerCase();
+            var password = passwordInput.value.trim();
+            
+            if (!email || !password) {
+                document.getElementById('login-error').style.display = 'block';
+                return;
+            }
+
+            // Step 1: Set sabai_auth for app.js compatibility
+            localStorage.setItem('sabai_auth', 'true');
+            
+            // Step 2: Set userRole based on email
+            if (email === 'admin@sabai.com') {
+                localStorage.setItem('userRole', 'superadmin');
+            } else {
+                localStorage.setItem('userRole', 'business');
+            }
+
+            // Step 3: Store the email
+            localStorage.setItem('sabai_user', email);
+            
+            // Step 4: Redirect to admin dashboard
+            window.location.href = 'admin.html';
+        });
+
+        document.getElementById('forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Coming soon');
+        });
+    </script>
+</body>
+</html>
